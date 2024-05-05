@@ -56,3 +56,7 @@ Installing Remix Online IDE
         balances[_address] -= _value;
     }    
 }
+
+# Author
+Heleana V. Laure
+Email: 8213709@ntc.edu.ph

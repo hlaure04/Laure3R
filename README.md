@@ -25,7 +25,7 @@ Installing Remix Online IDE
 
 # // Public variables
     string public tokenName = "Laure04";
-    string public tokenAbbreviation = "CRT";
+    string public tokenAbbreviation = "LRE";
     uint public totalSupply = 0;
     uint public minimumMintable = 100;
 

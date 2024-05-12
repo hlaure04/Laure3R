@@ -23,36 +23,46 @@ Installing Remix Online IDE
 # Code Snippet
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.7;
 
-contract Laure04 {
+contract HandleErrors {
+
+    // Public variables
     string public tokenName = "Laure04";
     string public tokenAbbreviation = "LRE";
-    uint public totalSupply = 0;
+    uint public totalSupply = 10;
     uint public minimumMintable = 100;
 
+    // Mapping variable to keep track of balances
     mapping(address => uint) public balances;
 
+    // Mint function
     function mint(address _address, uint _value) public {
-        // Ensure the caller is the address trying to mint tokens
+        
+        // Require statement checks if the caller of the function is the address trying to mint tokens
+        // If not, it will revert the transaction and provide the error message
         require(_address == msg.sender, "One person can only make tokens.");
 
-        // Ensure the value is greater than or equal to the minimum mintable amount
-        require(_value >= minimumMintable, "Mintable amount must be reached or exceeded.");
-
-        totalSupply += _value;
-        balances[_address] += _value;
+        // If the value is less than the minimum mintable amount, the transaction is reverted with an error message
+        // Otherwise, the total supply and the balance of the address are increased
+        if (_value < minimumMintable) {
+            revert("Small token mintable amount includes to be reached or exceeded.");
+        } else {
+            totalSupply += _value;
+            balances[_address] += _value;
+        }         
     }
 
+    // Burn function
     function burn(address _address, uint _value) public {
-        // Ensure the address has enough tokens to burn
-        require(balances[_address] >= _value, "Insufficient balance to burn tokens.");
 
+        // Assert statement checks if the balance of the address is greater than or equal to the value to be burned
+        // If not, it will throw an error and revert the state changes
+        assert(balances[_address] >= _value);
         totalSupply -= _value;
         balances[_address] -= _value;
-    }
+    }    
 }
-
 
 # Author
 Heleana V. Laure

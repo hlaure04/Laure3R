@@ -1,33 +1,30 @@
-# // Public variables
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Laure04 {
     string public tokenName = "Laure04";
     string public tokenAbbreviation = "LRE";
     uint public totalSupply = 0;
     uint public minimumMintable = 100;
 
-  # // mapping variable
     mapping(address => uint) public balances;
 
-   # // mint function
     function mint(address _address, uint _value) public {
-        
-  #  // Executing a require() statement
+        // Ensure the caller is the address trying to mint tokens
         require(_address == msg.sender, "One person can only make tokens.");
 
-   # // Implementing a revert() statement
-        if (_value < minimumMintable) {
-            revert("Small token mintable amount includes to be reached or exceeded.");
-        } else {
-            totalSupply += _value;
-            balances[_address] += _value;
-        }         
+        // Ensure the value is greater than or equal to the minimum mintable amount
+        require(_value >= minimumMintable, "Mintable amount must be reached or exceeded.");
+
+        totalSupply += _value;
+        balances[_address] += _value;
     }
 
- #   // burn function
     function burn(address _address, uint _value) public {
+        // Ensure the address has enough tokens to burn
+        require(balances[_address] >= _value, "Insufficient balance to burn tokens.");
 
-  #   // Executing a assert() statement
-        assert(balances[_address] >= _value);
         totalSupply -= _value;
         balances[_address] -= _value;
-    }    
+    }
 }

@@ -2,11 +2,8 @@
 Solidity-Error-Handling
 
 # Description
-A basic smart contract in which each of the functions that follow is executed: revert(), assert(), and require().
-
-# // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
-contract HandleErrors {
+A basic smart contract in which each of the functions 
+that follow is executed: revert(), assert(), and require().
 
 # Getting Launched
 Installing Remix Online IDE
@@ -23,39 +20,7 @@ Installing Remix Online IDE
 - To establish connections, duplicate addresses that are formatted as 0x5B3...eddC4 (100 ether).
 - Evaluate the functionalities of the smart contract to assess the implementation of issue management.
 
-# // Public variables
-    string public tokenName = "Laure04";
-    string public tokenAbbreviation = "LRE";
-    uint public totalSupply = 0;
-    uint public minimumMintable = 100;
-
-  # // mapping variable
-    mapping(address => uint) public balances;
-
-   # // mint function
-    function mint(address _address, uint _value) public {
-        
-  #  // Executing a require() statement
-        require(_address == msg.sender, "One person can only make tokens.");
-
-   # // Implementing a revert() statement
-        if (_value < minimumMintable) {
-            revert("Small token mintable amount includes to be reached or exceeded.");
-        } else {
-            totalSupply += _value;
-            balances[_address] += _value;
-        }         
-    }
-
- #   // burn function
-    function burn(address _address, uint _value) public {
-
-  #   // Executing a assert() statement
-        assert(balances[_address] >= _value);
-        totalSupply -= _value;
-        balances[_address] -= _value;
-    }    
-}
+# Code Snippet
 
 # Author
 Heleana V. Laure
